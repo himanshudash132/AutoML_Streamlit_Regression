@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Comparison Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-10">
+        <div class="bg-white p-8 rounded shadow-md">
+            <h1 class="text-2xl font-bold mb-4">Model Comparison Results</h1>
+
+            <h2 class="text-xl font-semibold mt-6 mb-4">Training Set</h2>
+            <table class="min-w-full table-auto">
+                <thead class="border-b">
+                    <tr>
+                        <th class="px-4 py-2">Model</th>
+                        <th class="px-4 py-2">R-Squared</th>
+                        <th class="px-4 py-2">RMSE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for model, stats in predictions_train.iterrows() %}
+                    <tr class="border-b">
+                        <td class="px-4 py-2">{{ model }}</td>
+                        <td class="px-4 py-2">{{ stats['R-Squared'] }}</td>
+                        <td class="px-4 py-2">{{ stats['RMSE'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h2 class="text-xl font-semibold mt-6 mb-4">Test Set</h2>
+            <table class="min-w-full table-auto">
+                <thead class="border-b">
+                    <tr>
+                        <th class="px-4 py-2">Model</th>
+                        <th class="px-4 py-2">R-Squared</th>
+                        <th class="px-4 py-2">RMSE</th>
+                        <th class="px-4 py-2">Time Taken</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for model, stats in predictions_test.iterrows() %}
+                    <tr class="border-b">
+                        <td class="px-4 py-2">{{ model }}</td>
+                        <td class="px-4 py-2">{{ stats['R-Squared'] }}</td>
+                        <td class="px-4 py-2">{{ stats['RMSE'] }}</td>
+                        <td class="px-4 py-2">{{ stats['Time Taken'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="mt-6">
+                <h3 class="text-lg font-semibold">R-Squared Plot</h3>
+                <img src="data:image/png;base64,{{ r2_plot }}" class="w-full" />
+
+                <h3 class="text-lg font-semibold mt-4">RMSE Plot</h3>
+                <img src="data:image/png;base64,{{ rmse_plot }}" class="w-full" />
+
+                <h3 class="text-lg font-semibold mt-4">Time Taken Plot</h3>
+                <img src="data:image/png;base64,{{ time_plot }}" class="w-full" />
+            </div>
+
+            <div class="mt-8">
+                <a href="/" class="bg-blue-500 text-white py-2 px-4 rounded">Go Back</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Comparison App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-10">
+        <div class="bg-white p-8 rounded shadow-md">
+            <h1 class="text-3xl font-bold mb-6">Machine Learning Algorithm Comparison App</h1>
+            <form action="/upload" method="POST" enctype="multipart/form-data" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold mb-2">Upload CSV File</label>
+                    <input type="file" name="file" class="block w-full border rounded py-2 px-3" />
+                    <p class="mt-2 text-sm text-gray-500">Or use the Boston Housing dataset if no file is uploaded.</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold mb-2">Split Size (% for Training Set)</label>
+                    <input type="range" name="split_size" min="10" max="90" value="80" class="w-full">
+                    <span id="splitValue" class="block mt-2 text-sm">Training: 80%</span>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold mb-2">Seed Number</label>
+                    <input type="number" name="seed_number" value="42" class="block w-full border rounded py-2 px-3" />
+                </div>
+
+                <div>
+                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Compare Models</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const rangeInput = document.querySelector('input[name="split_size"]');
+        const splitValue = document.getElementById('splitValue');
+        rangeInput.addEventListener('input', () => {
+            splitValue.textContent = `Training: ${rangeInput.value}%`;
+        });
+    </script>
+</body>
+</html>
